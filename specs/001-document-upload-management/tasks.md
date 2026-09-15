@@ -32,7 +32,7 @@
 
 ### Implementation for User Story 1
 
-- [ ] T008 [US1] Implement `Document` entity with required fields and relationships in `ContosoDashboard/Models/Document.cs`
+- [ ] T008 [US1] Implement `Document` entity with required fields and relationships in `ContosoDashboard/Models/Document.cs`  
 - [ ] T009 [US1] Implement `DocumentShare` entity in `ContosoDashboard/Models/DocumentShare.cs`
 - [ ] T010 [US1] Add upload workflow to `DocumentService` including validation, uniq path generation, file save, database persistence, and notification hooks
 - [ ] T011 [US1] Add authorization checks to document upload, listing, and retrieval actions based on the current user and project membership
