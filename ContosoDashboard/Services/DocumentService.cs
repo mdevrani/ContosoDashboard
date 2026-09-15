@@ -113,7 +113,7 @@ public class DocumentService : IDocumentService
     public async Task<Document> UploadDocumentAsync(DocumentUploadRequest request, int userId)
     {
         if (string.IsNullOrWhiteSpace(request.Title)) throw new InvalidOperationException("Document title is required.");
-        if (request.FileStream == null || request.FileStream.Length == 0) throw new InvalidOperationException("File is required.");
+        if (request.FileStream == null || request.FileSize <= 0) throw new InvalidOperationException("File is required.");
 
         var allowedExtensions = new[] { ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".txt", ".jpg", ".jpeg", ".png" };
         var extension = Path.GetExtension(request.FileName);
@@ -122,7 +122,7 @@ public class DocumentService : IDocumentService
             throw new InvalidOperationException("Unsupported file type.");
         }
 
-        if (request.FileStream.Length > 25 * 1024 * 1024)
+        if (request.FileSize > 25 * 1024 * 1024)
         {
             throw new InvalidOperationException("File exceeds the 25 MB limit.");
         }
@@ -135,7 +135,7 @@ public class DocumentService : IDocumentService
             Category = string.IsNullOrWhiteSpace(request.Category) ? "Other" : request.Category.Trim(),
             FileName = Path.GetFileName(request.FileName),
             FilePath = relativePath,
-            FileSize = request.FileStream.Length,
+            FileSize = request.FileSize,
             FileType = string.IsNullOrWhiteSpace(request.ContentType) ? "application/octet-stream" : request.ContentType,
             Tags = request.Tags,
             UploadedByUserId = userId,

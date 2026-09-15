@@ -62,6 +62,41 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
         context.Database.EnsureCreated(); // For development - use migrations in production
+            context.Database.ExecuteSqlRaw("""
+                CREATE TABLE IF NOT EXISTS Documents (
+                    DocumentId INTEGER NOT NULL CONSTRAINT PK_Documents PRIMARY KEY AUTOINCREMENT,
+                    Title TEXT NOT NULL,
+                    Description TEXT NULL,
+                    Category TEXT NOT NULL,
+                    FileName TEXT NOT NULL,
+                    FilePath TEXT NOT NULL,
+                    FileSize INTEGER NOT NULL,
+                    FileType TEXT NULL,
+                    Tags TEXT NULL,
+                    UploadedByUserId INTEGER NOT NULL,
+                    ProjectId INTEGER NULL,
+                    TaskId INTEGER NULL,
+                    UploadedAt TEXT NOT NULL,
+                    UpdatedAt TEXT NULL,
+                    IsDeleted INTEGER NOT NULL,
+                    CONSTRAINT FK_Documents_Users_UploadedByUserId FOREIGN KEY (UploadedByUserId) REFERENCES Users (UserId) ON DELETE RESTRICT,
+                    CONSTRAINT FK_Documents_Projects_ProjectId FOREIGN KEY (ProjectId) REFERENCES Projects (ProjectId) ON DELETE RESTRICT
+                );
+                CREATE INDEX IF NOT EXISTS IX_Documents_UploadedByUserId ON Documents (UploadedByUserId);
+                CREATE INDEX IF NOT EXISTS IX_Documents_ProjectId_Category ON Documents (ProjectId, Category);
+                CREATE TABLE IF NOT EXISTS DocumentShares (
+                    DocumentShareId INTEGER NOT NULL CONSTRAINT PK_DocumentShares PRIMARY KEY AUTOINCREMENT,
+                    DocumentId INTEGER NOT NULL,
+                    UserId INTEGER NOT NULL,
+                    SharedByUserId INTEGER NOT NULL,
+                    SharedAt TEXT NOT NULL,
+                    IsActive INTEGER NOT NULL,
+                    CONSTRAINT FK_DocumentShares_Documents_DocumentId FOREIGN KEY (DocumentId) REFERENCES Documents (DocumentId) ON DELETE CASCADE,
+                    CONSTRAINT FK_DocumentShares_Users_UserId FOREIGN KEY (UserId) REFERENCES Users (UserId) ON DELETE RESTRICT,
+                    CONSTRAINT FK_DocumentShares_Users_SharedByUserId FOREIGN KEY (SharedByUserId) REFERENCES Users (UserId) ON DELETE RESTRICT
+                );
+                CREATE INDEX IF NOT EXISTS IX_DocumentShares_DocumentId_UserId_IsActive ON DocumentShares (DocumentId, UserId, IsActive);
+                """);
     }
     catch (Exception ex)
     {

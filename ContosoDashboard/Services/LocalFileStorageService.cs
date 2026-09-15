@@ -21,7 +21,6 @@ public class LocalFileStorageService : IFileStorageService
 
         var targetPath = Path.Combine(targetFolder, uniqueFileName);
         await using var output = File.Create(targetPath);
-        fileStream.Position = 0;
         await fileStream.CopyToAsync(output);
 
         return Path.Combine(relativeFolder, uniqueFileName).Replace('\\', '/');

@@ -225,6 +225,7 @@
                 Tags = uploadModel.Tags,
                 FileName = selectedFile.Name,
                 ContentType = selectedFile.ContentType,
+                FileSize = selectedFile.Size,
                 FileStream = selectedFile.OpenReadStream(MaxFileSizeBytes)
             };
 

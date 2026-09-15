@@ -9,11 +9,11 @@
 
 **Purpose**: Add the document feature foundation without altering the existing app structure.
 
-- [ ] T001 Review current application models, DbContext, and service patterns to place document code consistently
-- [ ] T002 [P] Add document-related models and data context changes for Document and DocumentShare in `ContosoDashboard/Models/` and `ContosoDashboard/Data/ApplicationDbContext.cs`
-- [ ] T003 [P] Create storage abstraction and local implementation in `ContosoDashboard/Services/IFileStorageService.cs` and `ContosoDashboard/Services/LocalFileStorageService.cs`
-- [ ] T004 [P] Create base document service skeleton with validation rules in `ContosoDashboard/Services/IDocumentService.cs` and `ContosoDashboard/Services/DocumentService.cs`
-- [ ] T005 Configure a local upload folder under `AppData/uploads` and ensure the application creates it on first use
+- [X] T001 Review current application models, DbContext, and service patterns to place document code consistently
+- [X] T002 [P] Add document-related models and data context changes for Document and DocumentShare in `ContosoDashboard/Models/` and `ContosoDashboard/Data/ApplicationDbContext.cs`
+- [X] T003 [P] Create storage abstraction and local implementation in `ContosoDashboard/Services/IFileStorageService.cs` and `ContosoDashboard/Services/LocalFileStorageService.cs`
+- [X] T004 [P] Create base document service skeleton with validation rules in `ContosoDashboard/Services/IDocumentService.cs` and `ContosoDashboard/Services/DocumentService.cs`
+- [X] T005 Configure a local upload folder under `AppData/uploads` and ensure the application creates it on first use
 
 **Checkpoint**: Storage abstraction and document baseline are ready for feature development.
 
@@ -27,18 +27,18 @@
 
 ### Tests for User Story 1
 
-- [ ] T006 [P] [US1] Add a service test for valid document upload success and path generation in `ContosoDashboard.Tests/` or equivalent project test location
-- [ ] T007 [P] [US1] Add a validation test for unsupported file types and file size limits
+- [X] T006 [P] [US1] Add a service test for valid document upload success and path generation in `ContosoDashboard.Tests/` or equivalent project test location
+- [X] T007 [P] [US1] Add a validation test for unsupported file types and file size limits
 
 ### Implementation for User Story 1
 
-- [ ] T008 [US1] Implement `Document` entity with required fields and relationships in `ContosoDashboard/Models/Document.cs`  
-- [ ] T009 [US1] Implement `DocumentShare` entity in `ContosoDashboard/Models/DocumentShare.cs`
-- [ ] T010 [US1] Add upload workflow to `DocumentService` including validation, uniq path generation, file save, database persistence, and notification hooks
-- [ ] T011 [US1] Add authorization checks to document upload, listing, and retrieval actions based on the current user and project membership
-- [ ] T012 [US1] Add a Blazor document upload page or modal to collect metadata and submit files in `ContosoDashboard/Pages/`
-- [ ] T013 [US1] Add document list view for My Documents with sorting and filtering in `ContosoDashboard/Pages/Documents.razor`
-- [ ] T014 [US1] Update navigation and page routing so users can access document management from the app shell
+- [X] T008 [US1] Implement `Document` entity with required fields and relationships in `ContosoDashboard/Models/Document.cs`  
+- [X] T009 [US1] Implement `DocumentShare` entity in `ContosoDashboard/Models/DocumentShare.cs`
+- [X] T010 [US1] Add upload workflow to `DocumentService` including validation, uniq path generation, file save, database persistence, and notification hooks
+- [X] T011 [US1] Add authorization checks to document upload, listing, and retrieval actions based on the current user and project membership
+- [X] T012 [US1] Add a Blazor document upload page or modal to collect metadata and submit files in `ContosoDashboard/Pages/`
+- [X] T013 [US1] Add document list view for My Documents with sorting and filtering in `ContosoDashboard/Pages/Documents.razor`
+- [X] T014 [US1] Update navigation and page routing so users can access document management from the app shell
 
 **Checkpoint**: User Story 1 is fully operational and independently testable.
 

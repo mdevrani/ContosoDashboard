@@ -11,6 +11,7 @@ public class DocumentUploadRequest
     public string? Tags { get; set; }
     public string FileName { get; set; } = string.Empty;
     public string? ContentType { get; set; }
+    public long FileSize { get; set; }
     public Stream FileStream { get; set; } = Stream.Null;
 }
 
